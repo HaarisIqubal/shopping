@@ -78,6 +78,74 @@
   </div>
   <%- include('./layout/message') %>
 
+
+  <!-- Our Feature Product Section -->
+  <div class="section" style="margin-top: 50px;">
+    <div class="row">
+  
+      <div class="col-12 " style="margin-bottom: 15px;">
+        <h2 class="text-center" style="font-weight: 900">Feature Products</h2>
+      </div>
+  
+      <% for(var products of products) { %>
+      <div class="col-lg-4 col-md-6">
+        <center>
+          <div class="card" style="width: 20rem;">
+  
+            <div class="card-body">
+              <h4 class="card-title  text-left"><a href="/product/<%= products._id %>"
+                  class="text-primary"><%= products.product_name %></a></h4>
+              <h6 class="card-subtitle mb-2 text-muted text-left"><%= products.product_type %></h6>
+              <a href="/product/<%= products._id %>"><img class="img-raised rounded" src="/uploads/product/<%= products.product_image %>" width="250px" alt=""></a>
+              <br>
+              <br>
+              <h6 class="card-subtitle mb-2 text-muted text-left"> Designed by : <a
+                  href="/profile/<%= products.designer_id%>"><%= products.designer_id %> </a></h6>
+              <h4 class="text-left"> <i class="material-icons">₹</i> <%= products.product_total_price %></h4>
+              <% if(!isAuthenticated){ %>
+              <h5 class="text-left"> <a href="user/login"><i class="fas fa-thumbs-up"></i></a>&nbsp;
+                <%= products.product_likes%> </h5>
+  
+              <h5 class="text-left"><a class="card-link text-warning" href="/user/login">
+                  <i class="material-icons fas fa-shopping-cart"></i>
+                  <i class="fas fa-plus"></i>
+                </a>
+                <a class="card-link text-danger" href="/user/login">
+                  <i class="material-icons fas fa-heart"></i>
+                  <i class="fas fa-plus"></i>
+                </a>
+              </h5>
+              <% }else{ %>
+              <h3 class="text-left"><button class="card-link text-primary"
+                  style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                  data-id="<%= products._id %>" onClick="likeProduct('<%= products._id%>')"><i
+                    class="material-icons fas fa-thumbs-up"></i></button><small id="counts"
+                  data-like='<%= products._id%>'> &nbsp; <%= products.product_likes%></small></h3>
+              <h5 class="text-left">
+                <button onclick="addCart('<%= products._id %>')"
+                  style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                  class="text-warning ">
+                  <i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i>
+                </button> &nbsp;
+                <button onclick="addFavorite('<%= products._id %>')"
+                  style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                  class="card-link text-danger">
+                  <i class="material-icons fas fa-heart"></i> <i class="fas fa-plus"></i>
+                </button>
+              </h5>
+              <% } %>
+  
+            </div>
+          </div>
+        </center>
+      </div>
+      <% } %>
+      <div class="col-12">
+        <center><a class="btn btn-primary" href="/products">More Products</a></center>
+      </div>
+    </div>
+    </div>
+
   <div class="section" style="margin-top: 50px;">
     <div class="col-12" style="margin-bottom: 15px;">
       <h2 class="text-center" style="font-weight: 900;">Let's talk product</h2>
@@ -153,72 +221,7 @@
     </div>
   </div>
 
-  <!-- Our Feature Product Section -->
-  <div class="section" style="margin-top: 50px;">
-  <div class="row">
-
-    <div class="col-12 " style="margin-bottom: 15px;">
-      <h2 class="text-center" style="font-weight: 900">Feature Products</h2>
-    </div>
-
-    <% for(var products of products) { %>
-    <div class="col-lg-4 col-md-6">
-      <center>
-        <div class="card" style="width: 20rem;">
-
-          <div class="card-body">
-            <h4 class="card-title  text-left"><a href="/product/<%= products._id %>"
-                class="text-primary"><%= products.product_name %></a></h4>
-            <h6 class="card-subtitle mb-2 text-muted text-left"><%= products.product_type %></h6>
-            <a href="/product/<%= products._id %>"><img class="img-raised rounded" src="/uploads/product/<%= products.product_image %>" width="250px" alt=""></a>
-            <br>
-            <br>
-            <h6 class="card-subtitle mb-2 text-muted text-left"> Designed by : <a
-                href="/profile/<%= products.designer_id%>"><%= products.designer_id %> </a></h6>
-            <h4 class="text-left"> <i class="material-icons">₹</i> <%= products.product_total_price %></h4>
-            <% if(!isAuthenticated){ %>
-            <h5 class="text-left"> <a href="user/login"><i class="fas fa-thumbs-up"></i></a>&nbsp;
-              <%= products.product_likes%> </h5>
-
-            <h5 class="text-left"><a class="card-link text-warning" href="/user/login">
-                <i class="material-icons fas fa-shopping-cart"></i>
-                <i class="fas fa-plus"></i>
-              </a>
-              <a class="card-link text-danger" href="/user/login">
-                <i class="material-icons fas fa-heart"></i>
-                <i class="fas fa-plus"></i>
-              </a>
-            </h5>
-            <% }else{ %>
-            <h3 class="text-left"><button class="card-link text-primary"
-                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
-                data-id="<%= products._id %>" onClick="likeProduct('<%= products._id%>')"><i
-                  class="material-icons fas fa-thumbs-up"></i></button><small id="counts"
-                data-like='<%= products._id%>'> &nbsp; <%= products.product_likes%></small></h3>
-            <h5 class="text-left">
-              <button onclick="addCart('<%= products._id %>')"
-                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
-                class="text-warning ">
-                <i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i>
-              </button> &nbsp;
-              <button onclick="addFavorite('<%= products._id %>')"
-                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
-                class="card-link text-danger">
-                <i class="material-icons fas fa-heart"></i> <i class="fas fa-plus"></i>
-              </button>
-            </h5>
-            <% } %>
-
-          </div>
-        </div>
-      </center>
-    </div>
-    <% } %>
-    <div class="col-12">
-      <center><a class="btn btn-primary" href="/products">More Products</a></center>
-    </div>
-  </div>
-  </div>
+  
 
 <!-- Our Artist Section -->
   <div class="section" style="margin-top: 50px;">
