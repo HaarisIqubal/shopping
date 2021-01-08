@@ -1,0 +1,23 @@
+<%- include('./layout/header') %>
+
+<div class="container">
+    <form method="POST" action="/<%= level%>/products/edit/<%= products._id %>" enctype='multipart/form-data'>
+  <div class="form-group">
+    <label >Product Name</label>
+    <input type="text" class="form-control" name="productName" value="<%= products.product_name %>" aria-describedby="emailHelp" placeholder="Enter Product Name">
+  </div>      
+  <div class="form-group">
+    <label >Your Price</label>
+    <input type="text" class="form-control" name="productSellerPrice" value="<%= products.product_seller_price %>"  aria-describedby="emailHelp" placeholder="Enter Price">
+  </div>
+  <div class="form-group">
+    <label >Product Quantity</label>
+    <input type="number" class="form-control" name="productQuantity" value="<%= products.product_quantity %>" placeholder="Product Quantity">
+  </div>
+  <div class="form-group">
+      <label >Product Image</label>
+            <input type="file" class="form-control-file" name="productImage">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

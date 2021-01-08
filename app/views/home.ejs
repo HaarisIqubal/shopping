@@ -1,0 +1,422 @@
+<%- include('./layout/header') %>
+
+<style>
+  .description{
+    width: 45rem;
+    
+  }
+  .btn-mini-img{
+    margin-top: 180px;
+  }
+  .btn-large-img{
+    margin-top: 590px;
+  }
+
+  @media screen and (max-width: 1199px){
+    .btn-mini-img{
+    margin-top: 150px;
+  }
+
+  .btn-large-img{
+    margin-top: 480px;
+  }
+    }
+
+  @media screen and (max-width: 991px){
+    .description{
+      width: 35rem;
+    }
+    .btn-mini-img{
+    margin-top: 100px;
+  }
+  .btn-large-img{
+    margin-top: 340px;
+  }
+  .artist-img{
+    width: 200px;
+  }
+    }
+
+
+  @media screen and (max-width: 768px){
+    .description{
+      width: 25rem;
+    }
+    .btn-mini-img{
+    margin-top: 290px;
+    }
+    .btn-large-img{
+    margin-top: 900px;
+  }
+  
+    }
+
+    @media screen and (max-width: 559px){
+  .btn-mini-img{
+    margin-top: 290px;
+    }
+
+  .btn-mini-img{
+    margin-top: 170px;
+    }
+
+  .btn-large-img{
+    margin-top: 570px;
+  }
+  .buy-image-card-small{
+    width: 350px;
+    }
+    }
+
+</style>
+
+<div class="page-header" data-parallax="false" style="margin-top:30px;background-image: url('../../public/images/main/profile_img.svg')">
+  
+</div>
+
+<div class="container" style="margin-bottom: 100px">
+
+
+  <%- include('./layout/message') %>
+
+  <div class="section" style="margin-top: 150px;">
+    <div class="col-12" style="margin-bottom: 15px;">
+      <h2 class="text-center" style="font-weight: 900;">Let's talk product</h2>
+    </div>
+    <div class="row">
+
+        <div class="col-12" >
+           
+            <center>
+              <h5 class="description">Whatever print you want on any product, we’ll take care of it. Cushion, Frame, Phone case, Banner, Tea-coasters, Sachs, Bed sheets, Decorative boxes, Sketches, Notebook covers
+                You can also ask for your customised print on any product of your choice too. 
+                </h5>
+              </center>
+          </div>
+          <center>
+        <div class="row">
+
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+            <img class="card-img" src="../../public/images/products/mug1.jpg">
+            <div class="card-img-overlay">
+                <p class="card-text text-center btn-mini-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy Mugs</span></button></p>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+            <img class="card-img" src="../../public/images/products/badge1.jpg">
+            <div class="card-img-overlay">
+                <p class="card-text text-center btn-mini-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy Badges</span></button></p>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+            <img class="card-img" src="../../public/images/products/cover1.jpg">
+            <div class="card-img-overlay">
+                <p class="card-text text-center btn-mini-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy Cover</span></button></p>
+            </div>
+          </div>
+      </div>
+
+
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+              <img class="card-img" src="../../public/images/products/poster1.jpg">
+              <div class="card-img-overlay">
+                  <p class="card-text text-center btn-large-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy Poster</span></button></p>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+              <img class="card-img" src="../../public/images/products/shirt2.jpg">
+              <div class="card-img-overlay">
+                  <p class="card-text text-center btn-large-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy T-Shirt</span></button></p>
+              </div>
+            </div>
+      </div>
+      <div class="col-md-4">
+          <div class="card bg-dark text-white buy-image-card-small">
+              <img class="card-img" src="../../public/images/products/shirt3.jpg">
+              <div class="card-img-overlay">
+                  <p class="card-text text-center btn-large-img"><button class="btn btn-white btn-round"><span style="font-weight: 900;color: black">Buy T-Shirt</span></button></p>
+              </div>
+            </div>
+      </div>
+    </div>
+    </center>
+
+    </div>
+  </div>
+
+  <!-- Our Feature Product Section -->
+  <div class="section" style="margin-top: 150px;">
+  <div class="row">
+
+    <div class="col-12 " style="margin-bottom: 15px;">
+      <h2 class="text-center" style="font-weight: 900">Feature Products</h2>
+    </div>
+
+    <% for(var products of products) { %>
+    <div class="col-lg-4 col-md-6">
+      <center>
+        <div class="card" style="width: 20rem;">
+
+          <div class="card-body">
+            <h4 class="card-title  text-left"><a href="/product/<%= products._id %>"
+                class="text-primary"><%= products.product_name %></a></h4>
+            <h6 class="card-subtitle mb-2 text-muted text-left"><%= products.product_type %></h6>
+            <a href="/product/<%= products._id %>"><img class="img-raised rounded" src="/uploads/product/<%= products.product_image %>" width="250px" alt=""></a>
+            <br>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted text-left"> Designed by : <a
+                href="/profile/<%= products.designer_id%>"><%= products.designer_id %> </a></h6>
+            <h4 class="text-left"> <i class="material-icons">₹</i> <%= products.product_total_price %></h4>
+            <% if(!isAuthenticated){ %>
+            <h5 class="text-left"> <a href="user/login"><i class="fas fa-thumbs-up"></i></a>&nbsp;
+              <%= products.product_likes%> </h5>
+
+            <h5 class="text-left"><a class="card-link text-warning" href="/user/login">
+                <i class="material-icons fas fa-shopping-cart"></i>
+                <i class="fas fa-plus"></i>
+              </a>
+              <a class="card-link text-danger" href="/user/login">
+                <i class="material-icons fas fa-heart"></i>
+                <i class="fas fa-plus"></i>
+              </a>
+            </h5>
+            <% }else{ %>
+            <h3 class="text-left"><button class="card-link text-primary"
+                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                data-id="<%= products._id %>" onClick="likeProduct('<%= products._id%>')"><i
+                  class="material-icons fas fa-thumbs-up"></i></button><small id="counts"
+                data-like='<%= products._id%>'> &nbsp; <%= products.product_likes%></small></h3>
+            <h5 class="text-left">
+              <button onclick="addCart('<%= products._id %>')"
+                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                class="text-warning ">
+                <i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i>
+              </button> &nbsp;
+              <button onclick="addFavorite('<%= products._id %>')"
+                style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"
+                class="card-link text-danger">
+                <i class="material-icons fas fa-heart"></i> <i class="fas fa-plus"></i>
+              </button>
+            </h5>
+            <% } %>
+
+          </div>
+        </div>
+      </center>
+    </div>
+    <% } %>
+    <div class="col-12">
+      <center><a class="btn btn-primary" href="/products">More Products</a></center>
+    </div>
+  </div>
+  </div>
+
+<!-- Our Artist Section -->
+  <div class="section" style="margin-top: 150px;">
+    <div class="col-12" style="margin-bottom: 15px;">
+      <h2 class="text-center" style="font-weight: 900">Here is our Artists</h2>
+    </div>
+    <div class="team text-center">
+      <div class="row">
+        <% for(var artist of artists){ %>
+
+
+        <div class="col-md-4">
+          <div class="team-player">
+            <div class="card card-plain">
+              <div class="col-md-6 ml-auto mr-auto">
+                <img src="../../uploads/profile/<%= artist.profile_image%>" alt="Thumbnail Image"
+                  class="img-raised rounded-circle img-fluid artist-img">
+              </div>
+              <h4 class="card-title"><%= artist.full_name %>
+                <br>
+                <!-- Total Artwork 
+                                    <small class="card-description text-muted">100 Artworks</small>
+                                    -->
+              </h4>
+              <div class="card-body">
+                <p class="card-description" style="margin-top: -20px;"><a href="/profile/<%= artist._id %>"
+                    class="btn btn-info btn-round" role="button"><span style="font-weight: 900;">View Profile</span></a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+
+<!-- We Provide Section -->
+  <div class="section">
+    <div class="row">
+      <div class="col-12" style="margin-bottom: 15px;">
+        <h2 class="text-center" style="font-weight: 900">We Provide..</h2>
+      </div>
+    </div>
+    <div class="features text-center">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="info">
+            <div class="icon icon-info">
+              <i class="material-icons">verified_user</i>
+            </div>
+            <h4 class="info-title">Quality</h4>
+            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A
+              paragraph describing a feature will be enough.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info">
+            <div class="icon icon-success">
+              <i class="material-icons">how_to_reg</i>
+            </div>
+            <h4 class="info-title">Verified Users</h4>
+            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A
+              paragraph describing a feature will be enough.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info">
+            <div class="icon icon-danger">
+              <i class="material-icons">shopping_cart</i>
+            </div>
+            <h4 class="info-title">On Time Delivery</h4>
+            <p>Divide details about your product or agency work into parts. Write a few lines about each one. A
+              paragraph describing a feature will be enough.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Subscribe to news letter Section -->
+  <div class="section">
+    
+      <div class="col-12" style="margin-bottom: 15px;">
+        <h2 class="text-center" style="font-weight: 900;">Subscribe to our Newsletter</h2>
+        <br>
+        <br>
+      </div>
+        
+        <div class="row">
+          
+          <div class="col-md-6">
+            <div class="row">
+            <div class="col-6">
+            <img src="../../uploads/img/offer.png" alt="" style="height:50px;width: 170px;">
+            </div>
+            <div class="col-6">
+            <p style="font-size: 14px;font-weight: 500; color: darkorange">10% off, promos, <br>
+              and the best indie art ever!
+            </p>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-6" style="margin-top: 30px;">
+        <form method="POST" action="/subscribe/newsletter">
+        <div class="input-group">
+          <input type="email" class="form-control" name="email" placeholder="Your Email address">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+</div>
+</div>
+
+
+</div>
+
+
+<script type="text/javascript">
+  function addCart(id) {
+    $.ajax({
+      type: 'POST',
+      url: '/dashboard/cart/add/' + id + '/',
+      success: function (msg) {
+        //$('').toast('show')
+        location.reload();
+        $('#cart').toast('show');
+      }
+    });
+  }
+
+  function addFavorite(id) {
+    $.ajax({
+      type: 'POST',
+      url: '/dashboard/favorite/add/' + id + '/',
+      success: function (msg) {
+        //$('').toast('show')
+        console.log('Success')
+        location.reload();
+      }
+    });
+  }
+
+  function likeProduct(productID) {
+    $.ajax({
+            type: 'POST',
+            url: '/dashboard/like/product/' + productID + '/',
+            success: function(msg){
+              $.ajax({
+                  type: 'POST',
+                  url: '/dashboard/like/products/' + productID + '/',
+                  success: function (msg) {
+                    location.reload();
+                  }
+                })                            
+            }
+    })
+
+    
+    /*
+    $.ajax({
+            url: '/dashboard/getlikes/products/' + productID,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function(message){
+            console.log(message.count)
+            }
+    })*/
+
+  }
+
+  $(document).ready(function () {
+
+    $('.likeBtn').click(function () {
+      const productID = $(this).data("id")
+      const level = $(this).data('level')
+      $(this).removeClass('btn-primary');
+      $(this).addClass('disabled btn-primary');
+    })
+  })
+</script>
+
+
+
+
+
+
+
+<%- include('./layout/footer') %>

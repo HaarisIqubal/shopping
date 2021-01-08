@@ -1,0 +1,44 @@
+<%- include('./admin_header') %>
+
+  <div class="container">
+    <form method="POST" action="/admin/products/add" enctype='multipart/form-data'>
+  <div class="form-group">
+    <label >Product Name</label>
+    <input type="text" class="form-control" name="productName" placeholder="Enter Product Name">
+  </div>
+  <div class="form-group">
+        <label for="exampleFormControlSelect1">Product Type</label>
+        <select name="type" class="form-control">
+          <option value="Shirt">Shirt</option>
+          <option value="T-Shirt">T-Shirt</option>
+          <option value="Mugs">Mugs</option>
+          <option value="Wall Paintings">Wall Painting</option>
+        </select>
+  </div>      
+  <div class="form-group">
+    <label >Seller Price</label>
+    <input type="number" class="form-control" name="sellerPrice"  aria-describedby="emailHelp" placeholder="Enter Price">
+  </div>
+  <div class="form-group">
+        <label >Margin Price</label>
+        <input type="number" class="form-control" name="marginPrice"  aria-describedby="emailHelp" placeholder="Enter Price">
+  </div>
+  <div class="form-group">
+    <label >Product Quantity</label>
+    <input type="number" class="form-control" name="productQuantity" placeholder="Product Quantity">
+  </div>
+  <div class="form-group">
+      <label >Product Image</label>
+            <input type="file" class="form-control-file" name="productImage">
+  </div>
+  <div class="form-group">
+        <label >User ID</label>
+              <input type="text" class="form-control" name="userID" placeholder="Enter UserID">
+    </div>
+  <div class="form-group">
+        <label >Designer ID</label>
+              <input type="text" class="form-control" name="designerID" placeholder="Enter UserID">
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

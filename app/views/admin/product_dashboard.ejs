@@ -1,0 +1,86 @@
+<%- include('./admin_header') %>
+
+
+
+        <br>
+        <a class="btn btn-success" href="/admin/products/add">Add Product</a>
+        <br>
+        <br>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Product Price</th>
+          <th scope="col">Product Quantity</th>
+          <th scope="col">Product Likes</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          
+        <% for(var product of products) { %>
+          
+        <tr>
+          <td scope="row">!</td>
+          <td><%= product.product_name %></td>
+          <td><%= product.product_total_price %></td>
+          <td><%= product.product_quantity %></td>
+          <td><%= product.product_likes %></td>
+          <td>
+            <a class="btn btn-info" href="/admin/products/edit/<%= product._id%>">Edit</a>
+            <button class="deleteBtn btn btn-danger" onClick="deleteProduct('<%= product._id%>')">Delete</button>
+            <% if(product.product_status == true){ %>
+            <button class="btn btn-outline-success">Published</button>
+            <% } else { %>
+            <button class="btn btn-outline-danger">Unpublished</button>
+                <%} %>
+          </td>
+        </tr>
+        
+        <% } %>
+      </tbody>
+    </table>
+    
+    <br>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <%if (currentPage == 1) { %>
+        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+        <% } else { %>
+       <li class="page-item"><a class="page-link" href="/admin/products/dashboard/page/<%= currentPage-1 %>">Previous</a></li>
+        <% } %>
+        <% for(var i = 1; i <= totalPage ;i++) { %>
+          <% if (currentPage == i) { %>
+            <li class="page-item active"><a class="page-link" href="/admin/products/dashboard/page/<%= currentPage %>"><%= i %></a></li>
+            <% }else{ %>
+            <li class="page-item"><a class="page-link" href="/admin/products/dashboard/page/<%= i %>"><%= i %></a></li>
+        <% } %>
+        <% } %>
+        <%if (totalPage == currentPage) { %>
+          <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+          <% } else { %>
+         <li class="page-item"><a class="page-link" href="/admin/products/dashboard/page/<%= currentPage+1 %>">Next</a></li>
+          <% } %> 
+      </ul>
+    </nav>
+
+    <script>
+        function deleteProduct(id){
+            $.ajax({
+                type: 'DELETE',
+                url: '/admin/products/delete/' + id +'/'
+            })
+        }
+
+        $(document).ready(function(){
+            $('.deleteBtn').click(function(){
+                $(this).parent().parent().remove()      
+            })
+        })  
+
+
+    </script>
+    
+    

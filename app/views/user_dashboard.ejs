@@ -1,0 +1,171 @@
+<%- include('./layout/header') %>
+
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+      <div class="col-12">
+        <h1 style="font-weight: 900">Dashboard</h1>
+        <%- include('./layout/message') %> 
+      </div>
+      <div class="col-12">
+        <br>
+        <center>
+        <div class="col-sm-2">
+            <img src="/uploads/profile/<%= profileImage %>" alt="" class="rounded-circle img-fluid"></center>
+        </div>
+        </center> 
+      </div>       
+        <center><div class="col-md-12">
+                <h2><%= name %></h2>
+                <% if(type === "consumer") {%>
+                  <h3>Consumer</h3>
+                <% } else{ %>
+                  <h3>Designer</h3>
+                 <% } %>
+                 
+                 <p class="text-muted" style="width: 70%;"><%= about %></p>
+                
+        </div>
+      </center>
+        
+      <center>
+        <div class="col-md-12">
+                    
+                    <% if(type === 'consumer'){ %>
+                      <button class="btn btn-success btn-round" onclick="sellYourArt()"> <i class="material-icons">brush</i> &nbsp; Sell Your Art</button>                    
+                    <% } else { %>
+                      <a class="btn btn-success btn-round" href="/dashboard/addyourdesign"><i class="material-icons">add</i><i class="material-icons">brush</i>Add Your Art</a>
+                    <% } %>
+                    <a class="btn btn-warning btn-round" href="/dashboard/editprofile"><i class="material-icons">edit</i> &nbsp; Edit Profile</a>
+                    <a class="btn btn-danger btn-round" href="/dashboard/changepassword"><i class="material-icons">vpn_key</i> &nbsp; Change Password</a>
+            </div></center>
+    </div>
+    
+    
+</div>
+
+<div class="container">
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 ml-auto mr-auto">
+          <div class="profile-tabs">
+            <ul class="nav nav-pills nav-pills-icons justify-content-center " role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" href="#works" role="tab" data-toggle="tab">
+                  <i class="material-icons">palette</i> Work
+                </a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+
+    <div class="tab-content tab-space">
+       
+        <div class="tab-pane active text-center gallery" id="works">
+          <div class="row">
+              <% for(var design of designs) { %>
+            <div class="col-md-3 mx-auto">
+              
+                <img src="../../uploads/design/<%= design.design_image %>" style="width: 200px;height:200px" class="rounded">
+
+            </div>
+            <% } %> 
+            
+          </div>
+        </div>
+      
+      </div>
+    
+</div>
+
+<br>
+<!--Orders Table-->
+<div class="container">
+    <h2 style="font-weight: 900">Orders</h2>
+    
+    <% for(var ord of order){ %>
+    <div class="card card-nav-tabs text-center">
+     
+        <div class="card-header card-header-primary">
+          <%= ord._id %>
+        </div>
+        <div class="card-body">
+
+            <div class="progress-container">
+              <br>
+                <span class="progress-badge"><i class="fas fa-truck" style="background: -webkit-linear-gradient(#ef5350,#d32f2f);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;"> <%= ord.order_status %> </i></span>
+                  <br>
+                  <br>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+            </div>
+          
+          
+          <a href="#0" class="btn btn-primary">Know More</a>
+        </div>
+        <div class="card-footer text-muted text-left">
+          To: <%= ord.name %> <br>
+          Total Quantity: <%=  ord.cart.totalQty %> <br>
+          Total Price: $ <%= ord.cart.totalPrice %> <br>
+          Order Date: <%= ord.date %>
+        </div>
+    </div>
+    <% } %>
+    <a class="btn btn-primary" href="/dashboard/orders">View All Orders</a>
+</div>
+
+<!--Favorite Table-->
+<div class="container">
+    <h2 style="font-weight: 900">Favorite</h2>
+    
+    <% for(var favorite of favorite){ %>
+      <div class="card card-nav-tabs">
+          <div class="card-header card-header-info">
+              <p class="text-center" style="font-size: 20px ;font-weight: 600"><%=  favorite.product.product_name %></p>  
+          </div>
+          <div class="card-body">
+              <div class="row">
+              <div class="col-md-4 col-sm-12">
+                  <center>
+                    <img src="/uploads/product/<%= favorite.product.product_image %>" style="width: 250px;height: 250px;border-radius: 10px;box-shadow: 0px 4px 8px darkgrey;" alt="">
+                  </center>
+              </div>
+              <div class="col-md-8 col-sm-12">
+                      <center>
+                      
+                      <h4>Price: $ <%= favorite.product.product_total_price %></h4>
+                      <a class="btn btn-primary btn-round" href="#"><i class="fas fa-thumbs-up"></i> &nbsp; <%= favorite.product.product_likes %></a>
+                      <a class="btn btn-warning btn-round" href=""><i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i></a>
+                      <a class="btn btn-danger btn-round" href=""><i class="fas fa-heart-broken"></i></i> <i class="fas fa-minus"></i></a>
+
+                      <h4>Art by : <%= favorite.product.designer_id  %></h4>
+                    </center>
+            </div>
+              </div>
+          </div>
+        </div>
+    <% } %>
+    <a class="btn btn-info" href="/dashboard/favorite">View All Orders</a>
+</div>
+
+
+<script>
+    function sellYourArt(){
+        $.ajax({
+            type: 'POST',
+            url: '/dashboard/adddesigner',
+            success: function(msg) {
+                $(window).attr('location','/dashboard')
+            }
+        })
+    }
+</script>
+
+<%- include('./layout/footer') %>

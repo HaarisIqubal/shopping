@@ -1,0 +1,36 @@
+<%- include('./admin_header') %>
+
+<div class="container">
+        <form method="POST" action="/admin/products/edit/<%= products._id %>" enctype='multipart/form-data'>
+      <div class="form-group">
+        <label >Product Name</label>
+        <input type="text" class="form-control" name="productName" value="<%= products.product_name %>"  placeholder="Enter Product Name">
+      </div>
+      <h4>Type: <%= products.product_type %></h4>      
+      <div class="form-group">
+        <label >Seller Price</label>
+        <input type="number" class="form-control" name="sellerPrice" value="<%= products.product_seller_price %>"  aria-describedby="emailHelp" placeholder="Enter Price">
+      </div>
+      <div class="form-group">
+            <label >Margin Price</label>
+            <input type="number" class="form-control" name="marginPrice" value="<%= products.product_margin_price %>"  aria-describedby="emailHelp" placeholder="Enter Price">
+      </div>
+      <div class="form-group">
+        <label >Product Quantity</label>
+        <input type="number" class="form-control" name="productQuantity" value="<%= products.product_quantity %>"   placeholder="Product Quantity">
+      </div>
+      <div class="form-group">
+          <label >Product Image</label>
+                <input type="file" value="<%= products.product_image %>" class="form-control-file" name="productImage">
+      </div>
+      <div class="form-group">
+            <label >User ID</label>
+                  <input type="text" class="form-control" name="userID" value="<%= products.user_id %>"  placeholder="Enter UserID">
+        </div>
+      <div class="form-group">
+            <label >Designer ID</label>
+                  <input type="text" class="form-control" name="designerID" value="<%= products.designer_id %>" placeholder="Enter UserID">
+        </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>

@@ -1,0 +1,113 @@
+<%- include('./layout/header') %>
+
+<div class="container" style="margin-top: 100px;font-weight: 900">
+    <h2 style="font-weight:900">Products</h2>
+    <div class="row">
+    <% for(var product of products) {  %>
+        
+        <div class="col-md-4  col-sm-12">
+        <center><div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                          <h4 class="card-title text-left"><a href="/product/<%= product._id %>" class="text-primary"><%= product.product_name %></a></h4>
+                          <h6 class="card-subtitle mb-2 text-muted text-left"><%= product.product_type %></h6>
+                          <img src="../../uploads/product/<%= product.product_image %>" alt="" width="250px">
+                          <br>
+                          <br>
+                          <h6 class="card-subtitle mb-2 text-muted text-left">Designed by : <a href="/profile/<%= product.designer_id %>"><%= product.designer_id %></a></h6>
+                          <h4 class="text-left"> <i class="material-icons">₹</i>   <%= product.product_total_price %></h4>
+                          <% if(!isAuthenticated){ %>
+                            <h5 class="text-left"><a href="user/login"><i class="fas fa-thumbs-up text-left"></i> &nbsp; <%= product.product_likes %></a></h5>
+                            <h5 class="text-left">
+                            <a href="/user/login" class="card-link text-warning text-left"> <i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i></a>
+                            <a href="/user/login" class="card-link text-danger text-left"><i class="material-icons fas fa-heart"></i> <i class="fas fa-plus"></i></a>
+                                </h5> 
+                            <% }else{ %>
+                                    <h3 class="text-left"><button class="card-link text-primary" style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"  data-id="<%= product._id %>" onClick="likeProduct('<%= product._id%>')"><i class="material-icons fas fa-thumbs-up"></i></button><small id="counts" data-like='<%= product._id%>'> &nbsp; <%= product.product_likes%></small></h3> 
+                                    <h5 class="text-left"><button onclick="addCart('<%= product._id %>')" style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"  class="card-link text-warning">
+                                            <i class="material-icons fas fa-shopping-cart"></i> <i class="fas fa-plus"></i>   
+                                    </button>
+                                    <button onclick="addFavorite('<%= product._id %>')" style="border: none; background-color:white; outline: inherit;padding: 0;color: inherit;font: inherit;"  class="card-link text-danger">
+                                            <i class="material-icons fas fa-heart"></i> <i class="fas fa-plus"></i>    
+                                    </button>
+                                </h5>                
+                            <% } %>
+                          
+                        </div>
+                </div>
+        </center>
+        </div>
+        
+        
+    <% } %>
+</div>
+
+</div>
+
+
+<%- include('./layout/footer') %>
+
+<script type="text/javascript">
+    function addCart(id){
+            $.ajax({
+                    type: 'POST',    
+                    url: '/dashboard/cart/add/'+ id +'/',
+                    success: function(msg){ 
+                            //$('').toast('show')
+                            $('#cart').toast('show');
+                            location.reload(); 
+                    }
+                    });
+    }
+
+    function addFavorite(id){
+            $.ajax({
+                    type: 'POST',    
+                    url:'/dashboard/favorite/add/'+ id +'/',
+                    success: function(msg){ 
+                            //$('').toast('show')
+                            console.log('Success')
+                    }
+                    });
+    }
+
+    function likeProduct(productID){
+            /*$.ajax({
+                    type: 'POST',
+                    url: '/dashboard/like/product/' + productID + '/',
+                    success: function(msg){
+                                                    
+                    }
+            })*/
+
+            $.ajax({
+                    type: 'POST',
+                    url: '/dashboard/like/products/' + productID + '/',
+                    success: function(msg){ 
+                      location.reload();
+                    }
+            })
+            /*
+            $.ajax({
+                    url: '/dashboard/getlikes/products/' + productID,
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(message){
+                    console.log(message.count)
+                    }
+            })*/
+                            
+    }
+
+    $(document).ready(function(){
+            
+            $('.likeBtn').click(function(){
+                    const productID = $(this).data("id")
+                    const level = $(this).data('level')
+                    $(this).removeClass('btn-primary');      
+                    $(this).addClass('disabled btn-primary');
+            })
+            })  
+    
+    
+    
+    </script>

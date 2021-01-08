@@ -1,0 +1,34 @@
+<%- include('./admin_header') %>
+<br>
+<div class="container">
+
+<% for(var order of orders) { %>
+<div class="card">
+        <div class="card-header">
+               Order On : <%= order.date %> <br>
+               Current Status : <%= order.order_status %>
+        </div>
+        <div class="card-body">
+                <ul class="list-group">
+                        <% Object.keys(order.cart.items).forEach(function(prop){ %>
+                        
+                        <li class="list-group-item">
+                            <div class="row">
+                            <div class="col-6"> Product Name:  <a href="/product/<%- order.cart.items[prop].item._id %>"><%- order.cart.items[prop].item.product_name %> </a></div>
+                            <div class="col-3">Price: <%- order.cart.items[prop].price  %></div>
+                            <div class="col-3"> Quantity : <%-order.cart.items[prop].qty%></div>
+                            </div>
+                        </li>
+                        <%})%>
+                      </ul>
+          <br>
+          <p class="card-text">Address: <%= order.address%></p>
+          <p class="card-text">Order by: <%= order.name%></p>
+          <a href="#" class="btn btn-primary">Know More</a>
+        </div>
+      </div>
+      <br>
+    <% } %>
+
+
+</div>

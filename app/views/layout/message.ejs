@@ -1,0 +1,31 @@
+<% if (typeof errors != 'undefined') { %>
+    <% errors.forEach(function(error){ %>
+        <center><div class="alert alert-warning w-50 main-raised" style="border-radius: 10px; margin-top: 40px" role="alert">
+                <%= error.msg %>
+              </div></center>
+   <% })  %>
+<% } %>
+
+<% if(success_msg != '') { %>
+    <center><div class="alert alert-success w-50 main-raised" style="border-radius: 10px; margin-top: 40px" role="alert">
+            <%= success_msg %>
+          </div></center>
+<% } %>
+
+<% if(error_msg != '') { %>
+   <center> <div class="alert alert-danger w-50 main-raised" style="border-radius: 10px; margin-top: 40px" role="alert">
+            <%= error_msg %>
+          </div></center>
+<% } %>
+
+<% if(warning_msg != '') { %>
+  <center><div class="alert alert-warning w-50 main-raised" style="border-radius: 10px; margin-top: 40px" role="alert">
+          <%= warning_msg %>
+        </div></center>
+<% } %>
+
+<% if(error != '') { %>
+  <center><div class="alert alert-warning w-50 main-raised" style="border-radius: 10px; margin-top: 40px" role="alert">
+          <%= error %>
+        </div></center>
+<% } %>

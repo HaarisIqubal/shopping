@@ -1,0 +1,86 @@
+<%- include('./layout/header') %>
+
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('/uploads/img/back/profile_img.svg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="brand text-center">
+          <h3>Welcome To <%= artist.full_name%> Profile Page</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main main-raised">
+
+
+<div class="container"">
+    <div class="row">
+     
+      <div class="col-12" style="margin-top: -100px;">
+        <br>
+        <center>
+        <div class="col-sm-2">
+            <img src="/uploads/profile/<%= artist.profile_image %>" alt="" class="rounded-circle img-fluid"></center>
+        </div>
+        </center> 
+      </div>       
+        <center><div class="col-md-12">
+                Artist
+                 <p class="text-muted" style="width: 70%;"><%= artist.about %></p>
+                
+        </div>
+      </center>
+        
+    </div>
+    
+    
+
+
+<div class="container">
+    <br>
+
+    <div class="row">
+        <div class="col-md-3 ml-auto mr-auto">
+          <div class="profile-tabs">
+            <ul class="nav nav-pills nav-pills-icons justify-content-center " role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" href="#works" role="tab" data-toggle="tab">
+                  <i class="material-icons">palette</i> Work
+                </a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+
+    <div class="tab-content tab-space">
+       
+        <div class="tab-pane active text-center gallery" id="works">
+          <div class="row">
+              <% for(var design of designs) { %>
+            <div class="col-lg-3 col-md-4 col-sm-6 ml-auto mx-auto">
+              
+                <img src="../../uploads/design/<%= design.design_image %>" style="width: 200px;height:200px" class="rounded">
+
+            </div>
+            <% } %> 
+            
+          </div>
+        </div>
+      
+      </div>
+    
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+
+<%- include('./layout/footer') %>

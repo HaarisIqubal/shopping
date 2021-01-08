@@ -1,0 +1,183 @@
+<%- include('./layout/header') %>
+
+<div class="container" style="margin-top: 100px">
+      <h1 style="font-weight: 800">Orders</h1>
+      <br>
+      <% for(var item of orders) {%>
+        <% if(item.order_status === "Progress") {%>
+          <div class="card card-nav-tabs text-center">
+              <div class="card-header card-header-primary">
+                <%= item.date %>
+              </div>
+              <div class="card-body">
+
+
+                  
+                  <div class="card">
+                      <div class="card-body">
+                          <% Object.keys(item.cart.items).forEach(function(prop){ %>
+                        <div class="row">
+                          <a class="col-4 text-left" href="/product/<%-item.cart.items[prop].item._id %> "><h3><%-item.cart.items[prop].item.product_name %> </h3></a>
+                          <h3 class="col-4">$<%-item.cart.items[prop].price %> </h3>
+                          <h3 class="col-4">Quantity : <%- item.cart.items[prop].qty %></h3>
+                        </div>
+                        <% }) %>
+                      </div>
+                    </div>
+                    
+                 
+                  <div class="progress-container">
+                      <span class="progress-badge"><i class="fas fa-truck" style="background: -webkit-linear-gradient(#ab47bc, #7b1fa2);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;"> In Progress </i></span>
+                        <br>
+                        <br>
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                          </div>
+                      </div>
+                  </div>
+                
+                
+                <a href="order/<%= item._id %>" class="btn btn-primary">Know More</a>
+              </div>
+              <div class="card-footer text-muted text-left">
+                To: <%= item.name %> <br>
+                Total Quantity: <%=  item.cart.totalQty %> <br>
+                Total Price: $ <%= item.cart.totalPrice %> <br>
+                2 days ago
+              </div>
+          </div>
+          <% } else if(item.order_status === "Transit"){ %>
+            <div class="card card-nav-tabs text-center">
+                <div class="card-header card-header-warning">
+                  <%= item.date %>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <% Object.keys(item.cart.items).forEach(function(prop){ %>
+                          <div class="row">
+                            <a class="col-4 text-left text-warning" href="/product/<%-item.cart.items[prop].item._id %> "><h3><%-item.cart.items[prop].item.product_name %> </h3></a>
+                            <h3 class="col-4">$<%-item.cart.items[prop].price %> </h3>
+                            <h3 class="col-4">Quantity : <%- item.cart.items[prop].qty %></h3>
+                          </div>
+                          <% }) %>
+                        </div>
+                      </div>
+                    <div class="progress-container">
+                        <span class="progress-badge"><i class="fas fa-truck" style="background: -webkit-linear-gradient(#ffa726,#f57c00);
+                          -webkit-background-clip: text;
+                          -webkit-text-fill-color: transparent;"> In Progress </i></span>
+                          <br>
+                          <br>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+                  <a href="order/<%= item._id %>" class="btn btn-warning">Know More</a>
+                </div>
+                <div class="card-footer text-muted text-left">
+                  To: <%= item.name %> <br>
+                  Total Quantity: <%=  item.cart.totalQty %> <br>
+                  Total Price: $ <%= item.cart.totalPrice %> <br>
+                  2 days ago
+                </div>
+            </div>
+           <% } else if(item.order_status === "Delivered") { %>
+            <div class="card card-nav-tabs text-center">
+                <div class="card-header card-header-success">
+                  <%= item.date %>
+                </div>
+                <div class="card-body">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <% Object.keys(item.cart.items).forEach(function(prop){ %>
+                          <div class="row">
+                            <a class="col-4 text-left text-success" href="/product/<%-item.cart.items[prop].item._id %> "><h3><%-item.cart.items[prop].item.product_name %> </h3></a>
+                            <h3 class="col-4">$<%-item.cart.items[prop].price %> </h3>
+                            <h3 class="col-4">Quantity : <%- item.cart.items[prop].qty %></h3>
+                          </div>
+                          <% }) %>
+                        </div>
+                      </div>
+  
+                    <div class="progress-container">
+                      <br>
+                        <span class="progress-badge"><i class="fas fa-truck" style="background: -webkit-linear-gradient(#66bb6a,#388e3c);
+                          -webkit-background-clip: text;
+                          -webkit-text-fill-color: transparent;"> Delivered </i></span>
+                          <br>
+                          <br>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+                  <a href="order/<%= item._id %>" class="btn btn-success">Know More</a>
+                </div>
+                <div class="card-footer text-muted text-left">
+                  To: <%= item.name %> <br>
+                  Total Quantity: <%=  item.cart.totalQty %> <br>
+                  Total Price: $ <%= item.cart.totalPrice %> <br>
+                  2 days ago
+                </div>
+            </div>
+          <% } else { %>
+            <div class="card card-nav-tabs text-center">
+                <div class="card-header card-header-danger">
+                  <%= item.date %>
+                </div>
+                <div class="card-body">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <% Object.keys(item.cart.items).forEach(function(prop){ %>
+                          <div class="row">
+                            <a class="col-4 text-left text-danger" href="/product/<%-item.cart.items[prop].item._id %> "><h3><%-item.cart.items[prop].item.product_name %> </h3></a>
+                            <h3 class="col-4">$<%-item.cart.items[prop].price %> </h3>
+                            <h3 class="col-4">Quantity : <%- item.cart.items[prop].qty %></h3>
+                          </div>
+                          <% }) %>
+                        </div>
+                      </div>
+  
+                    <div class="progress-container">
+                      <br>
+                        <span class="progress-badge"><i class="fas fa-truck" style="background: -webkit-linear-gradient(#ef5350,#d32f2f);
+                          -webkit-background-clip: text;
+                          -webkit-text-fill-color: transparent;"> Failed </i></span>
+                          <br>
+                          <br>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+                  <a href="order/<%= item._id %>" class="btn btn-danger">Know More</a>
+                </div>
+                <div class="card-footer text-muted text-left">
+                  To: <%= item.name %> <br>
+                  Total Quantity: <%=  item.cart.totalQty %> <br>
+                  Total Price: $ <%= item.cart.totalPrice %> <br>
+                  2 days ago
+                </div>
+            </div>
+          <% } %>  
+        
+          <br>
+          
+      <% } %>  
+</div>
+
+    <script>
+        
+    </script>
