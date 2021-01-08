@@ -14,6 +14,7 @@ module.exports.get_all_data = (req,res,next)=>{
             if (err) throw err;
             if(!req.isAuthenticated()){
                 res.render('home',{
+                    title: "Home",
                     products: allProduct,
                     likeProduct: likeProduct,
                     artists:artists,
@@ -22,6 +23,7 @@ module.exports.get_all_data = (req,res,next)=>{
             }
             else{
                 res.render('home',{
+                    title: "Home",
                     products: allProduct,
                     likeProduct: likeProduct, 
                     user: req.user._id,
@@ -41,24 +43,41 @@ module.exports.get_all_products = (req,res,next) => {
     Product.find({'product_status': true},{},{sort: {"product_likes":"asc"}},(err,products)=>{
         //console.log(products)
         res.render('product_all',{products:products,
-            siteTitle:'All Products',
+            title: 'All Products' ,
+            isAuthenticated:req.isAuthenticated()});
+    })
+}
+
+module.exports.get_all_mug = (req,res,next) => {
+    Product.find({'product_type': "Mug"},{},{sort: {"product_likes":"asc"}},(err,products)=>{
+        //console.log(products)
+        res.render('product_all',{products:products,
+            title: 'All Shirts',
+            isAuthenticated:req.isAuthenticated()});
+    })
+}
+
+module.exports.get_all_shirt = (req,res,next) => {
+    Product.find({'product_type': "Shirt"},{},{sort: {"product_likes":"asc"}},(err,products)=>{
+        //console.log(products)
+        res.render('product_all',{products:products,
+            title: 'All Shirts',
             isAuthenticated:req.isAuthenticated()});
     })
 }
 
 module.exports.get_product_details = (req,res,next) => {
     Product.findById(req.params.productID,(err,productDetail)=>{
-
         if(!req.isAuthenticated()){
             res.render('home_product_description',{
                 productDetail: productDetail,
-                siteTitle: "Product Detail",
+                title: productDetail.product_name,
                 isAuthenticated: false
             })
         }else{
             res.render('home_product_description',{
                 productDetail: productDetail,
-                siteTitle: "Product Detail",
+                title: productDetail.product_name,
                 isAuthenticated: true
             })
         }
@@ -80,22 +99,22 @@ module.exports.get_search = (req,res,next) => {
                     if(!req.isAuthenticated()){
                         return res.render('home_search',{errors,
                             Products:searchProduct,
-                            siteTitle: "Search Product",
+                            title: "Search Product",
                             isAuthenticated:false})
                     }else{
                         return res.render('home_search',{errors,
                             Products:searchProduct,
-                            siteTitle: "Search Product",
+                            title: "Search Product",
                             isAuthenticated:true})
                     }  
                 }else{
                     if(!req.isAuthenticated()){
                         return res.render('home_search',{Products:searchProduct,
-                            siteTitle: "Search Product",
+                            title: "Search Product",
                             isAuthenticated:false})
                     }else{
                         return res.render('home_search',{Products:searchProduct,
-                            siteTitle: "Search Product",
+                            title: "Search Product",
                             isAuthenticated:true})
                     }
                 }
@@ -116,7 +135,7 @@ module.exports.get_search = (req,res,next) => {
                     res.render('home',{
                         products: allProduct,
                         likeProduct: likeProduct,
-                        siteTitle: "Search Product", 
+                        title: "Search Product", 
                         isAuthenticated: false,
                         errors
                     });
@@ -126,7 +145,7 @@ module.exports.get_search = (req,res,next) => {
                         products: allProduct,
                         likeProduct: likeProduct, 
                         user: req.user._id,
-                        siteTitle: "Search Product",
+                        title: "Search Product",
                         isAuthenticated: true, 
                         level: req.user.level});
                 }
@@ -140,13 +159,11 @@ module.exports.get_artist_profile = (req,res,next) => {
     const userID = req.params.userID;
     User.findById(userID,{},(err,artist)=>{
         Design.find({"designer_id": userID},{},(err,designs)=>{
-
-        
         if(err){
             return res.write("!Err")
         }else{
             console.log(artist)
-            res.render('home_artist_profile',{artist,designs})
+            res.render('home_artist_profile',{artist,designs,title:"Artist"})
         }
         })
     

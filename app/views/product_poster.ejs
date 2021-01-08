@@ -1,0 +1,21 @@
+<%- include('./layout/header') %>
+<style>
+    img{
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<div class="container">
+<h1>Products</h1>
+<% for(var products of products) { %>
+    <h1><%= products.product_name %></h1>
+    <h3><%= products.product_price %></h3>
+    <h3><%= products.product_quantity %></h3>
+    <img src="/uploads/product/<%= products.product_image %>" alt="">  
+<% } %>
+
+
+  
+</div>
+
+<%- include('./layout/footer') %>

@@ -7,6 +7,7 @@ module.exports.get_dashboard = (req,res)=> {
     }else{
         if(req.user.level === 'publisher'){
             res.render('user_dashboard',{
+                title: "Dashboard",
                 name: req.user.full_name,
                 email: req.user.email,
                 isAuthenticated: true,
@@ -26,7 +27,9 @@ module.exports.get_dashboard = (req,res)=> {
 //Cart
 module.exports.get_cart = (req,res,next) => {
     if(req.user.level === 'publisher'){
-        res.render('user_cart',{cart: req.user.cart, isAuthenticated: true, level: req.user.level, host: req.get('host')})
+        res.render('user_cart',{
+            title: "User Cart",
+            cart: req.user.cart, isAuthenticated: true, level: req.user.level, host: req.get('host')})
     } else{
         res.redirect('consumer/dashboard/cart')
     }

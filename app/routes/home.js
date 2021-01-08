@@ -11,6 +11,8 @@ router.get('/search', home.get_search);
 
 router.get('/products', home.get_all_products);
 
+router.get('/shirts',home.get_all_shirt);
+
 //Getting Data Profile of Designer
 
 router.get('/profile/:userID',home.get_artist_profile);
